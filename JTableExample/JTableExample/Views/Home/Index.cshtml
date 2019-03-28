@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "JTable Example";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-
+requests">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- STYLES -->
+    <link href="~/js/jtable/Content/themes/metroblue/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="~/js/jtable/Scripts/jtable/themes/metro/blue/jtable.css" rel="stylesheet" type="text/css" />
+
+    <!-- SCRIPTS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/js/jtable/Scripts/jtable/jquery.jtable.js"></script>
+
+</head>
+<body>
+    <div id="StudentTableContainer"></div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            alert("Starting to load the JTable Grid");
+            $('#StudentTableContainer').jtable({
+                title: 'The Student List',
+                actions: {
+                    listAction: '/Home/GetItems',
+                    deleteAction: '/Home/DeletePerson',
+                    updateAction: '/Home/UpdatePerson',
+                    createAction: '/Home/CreatePerson'
+                },
+                fields: {
+                    StudentID: {
+                        key: true,
+                        create: false,
+                        edit: false,
+                        list: true,
+                        title: 'Student ID',
+                    },
+                    StudentName: {
+                        title: 'Student Name',
+                    }
+                }
+            });
+            //Load student list from server
+            $('#StudentTableContainer').jtable('load');
+        });
+    </script>
+</body>
+</html>
